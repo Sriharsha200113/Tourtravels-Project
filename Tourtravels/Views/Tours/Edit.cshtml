@@ -1,0 +1,112 @@
+﻿@model NewTourvm
+@using Tourtravels.data;
+ 
+@{
+    ViewData["Title"] = "Update Tour";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h4>Update Tour</h4>
+        </p>
+
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="StartDate" class="control-label"></label>
+                                <input asp-for="StartDate" type="date" class="form-control" />
+                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="EndDate" class="control-label"></label>
+                                <input asp-for="EndDate" type="date" class="form-control" />
+                                <span asp-validation-for="EndDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Persons" class="control-label"></label>
+                                <input asp-for="Persons" type="number" class="form-control" />
+                                <span asp-validation-for="Persons" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Price" class="control-label"></label>
+                                <input asp-for="Price" type="number" class="form-control" />
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ImageUrl" class="control-label"></label>
+                                <input asp-for="ImageUrl" class="form-control" />
+                                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="PackageId" class="control-label"></label>
+                                <select asp-for="PackageId" class="form-control" asp-items="ViewBag.Packages"></select>
+                                <span asp-validation-for="PackageId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="TourCategory" class="control-label"></label>
+                                <select asp-for="TourCategory" class="form-control" asp-items="Html.GetEnumSelectList<TourCategory>()"></select>
+                                <span asp-validation-for="TourCategory" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="GuideId" class="control-label"></label>
+                                <select asp-for="GuideId" class="form-control" asp-items="ViewBag.Guides"></select>
+                                <span asp-validation-for="GuideId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PlaceIds" class="control-label"></label>
+                                <select asp-for="PlaceIds" class="form-control" asp-items="ViewBag.Places" multiple></select>
+                                <span asp-validation-for="PlaceIds" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea asp-for="Description" class="form-control"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 offset-4 text-center">
+                        <img width="100%" id="ImageUrlPreview" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-outline-success float-right" />
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById("ImageUrlPreview");
+            output.src = $("#ImageUrl").val();
+        });
+
+        $("#ImageUrl").on("change", function () {
+            var output = document.getElementById("ImageUrlPreview");
+            output.src = $(this).val();
+        })
+    </script>
+}
